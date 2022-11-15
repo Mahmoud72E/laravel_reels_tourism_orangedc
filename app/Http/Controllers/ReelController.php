@@ -15,14 +15,20 @@ class ReelController extends Controller
 {
     use UploadReelTrait;
     /**
-     * Display a listing of the resource.
+     * Display a listing of the places.
      *
-     * @return \Illuminate\Http\Response
+     * @returnview
      */
     public function places(){
         $places = Place::all();
         return view('reels.places', compact('places'));
     }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function index(Request $request)
     {
         $id = $request->place_id;

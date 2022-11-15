@@ -9,7 +9,7 @@ class CommentController extends Controller
 {
     public function index($idr)
     {
-        // $uid = $idu;
+        
         $rid = $idr;
         return view('reels.comment', compact('rid'));
     }

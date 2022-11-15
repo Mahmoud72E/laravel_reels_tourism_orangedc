@@ -1,9 +1,9 @@
 <?php
 
+use App\Http\Controllers\Api\ReelController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\ReelController;
 use App\Http\Controllers\SocialiteController;
 
 /*
@@ -27,8 +27,16 @@ Route::prefix('v1')->group(function () {
         Route::post('/loginbygoogle', 'loginbygoogle');
     });
     Route::post('/login/callback', [SocialiteController::class, 'handleProviderCallback']);
-   // Route::resource('reel', ReelController::class);
-    Route::post('reel', [ReelController::class, 'store']);
+
+
+    Route::middleware(['jwt-verify'])->group(function(){
+        Route::post('reels', [ReelController::class, 'index']);
+        Route::get('reel/{id}', [ReelController::class, 'show']);
+        Route::post('StoreReel', [ReelController::class, 'store']);
+        Route::get('places', [ReelController::class, 'places']);
+        Route::post('comment', [ReelController::class, 'storeComment']);
+        Route::post('comments', [ReelController::class, 'comments']);
+    });
 });
 
 
